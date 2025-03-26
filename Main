@@ -1,3 +1,15 @@
 !pip uninstall -y h2o
 !pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o
 !pip install fastapi uvicorn
+
+from google.colab import files
+import io
+import pandas as pd
+
+uploaded = files.upload()
+
+for fn in uploaded.keys():
+  # Assuming the uploaded file is a CSV
+  data = pd.read_csv(io.BytesIO(uploaded[fn]))
+  print(f"Descriptive statistics for {fn}:")
+  display(data.describe())
